@@ -1,0 +1,31 @@
+@import "@/styles/base";
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 24px;
+
+  & > * {
+    border-radius: 5px;
+  }
+
+  & > :first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 154px;
+    padding: 30px 20px;
+    background-color: $dark-blue;
+  }
+
+  & > :last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 56px;
+    padding: 10px 20px;
+    border: 2px solid $dark-blue;
+  }
+}

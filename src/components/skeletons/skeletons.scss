@@ -1,0 +1,48 @@
+@import "@/styles/base";
+
+// Shapes
+
+.skeleton-bar {
+  height: 10px;
+}
+.skeleton-circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+// Colors
+
+.white {
+  background-color: $white;
+}
+.light-grey {
+  background-color: $light-grey;
+}
+.medium-grey {
+  background-color: $medium-grey;
+}
+.orange-primary {
+  background-color: $orange-primary;
+}
+.dark-blue {
+  background-color: $dark-blue;
+}
+
+// Widths
+
+.w-25 {
+  width: 25%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-75 {
+  width: 75%;
+}
+.w-75px {
+  width: 75px;
+}
+.w-100px {
+  width: 100px;
+}

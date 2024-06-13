@@ -1,13 +1,10 @@
-@import "base";
+@import "@/styles/base";
 
-$layout-breakpoint-medium: 1024px;
-$layout-breakpoint-small: 768px;
-
-$grid-gap: 24px;
+// Layout
 
 .dashboard {
   display: grid;
-  grid-template-columns: 255px $grid-gap 1fr $grid-gap 235px $grid-gap;
+  grid-template-columns: 255px $grid-gap 1.5fr $grid-gap 0.5fr $grid-gap;
   grid-template-rows: 65px $grid-gap 1fr;
   height: 100vh;
 
@@ -27,16 +24,22 @@ $grid-gap: 24px;
     grid-column: 3;
     grid-row: 3;
     background-color: $white;
+    width: 100%;
+    min-width: 450px;
+    max-width: 800px;
   }
 
   .aside {
     grid-column: 5;
     grid-row: 3;
-    background-color: $dark-blue;
+    justify-self: end;
+    width: 100%;
+    min-width: 230px;
+    max-width: 412px;
   }
 
   @media (max-width: $layout-breakpoint-medium) {
-    grid-template-columns: 250px $grid-gap 1fr $grid-gap;
+    grid-template-columns: 255px $grid-gap 1fr $grid-gap;
     .content {
       grid-column: 3;
     }
