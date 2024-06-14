@@ -1,7 +1,14 @@
-import { useEffect, useState, createContext } from "react";
-import { Post, ContentTab, ContentTabContextProps } from "@/types";
-import mockData from "@assets/mock_data.json";
 import "@components/content/Content.scss";
+
+import { useEffect, useState, createContext } from "react";
+import { PostProps, ContentTab, ContentTabContextProps } from "@/types";
+
+import ContentTabs from "@components/content/ContentTabs";
+import ContentFilter from "@components/content/ContentFilter";
+import ContentLoader from "@components/content/ContentLoader";
+import Post from "@components/post/Post";
+
+import mockData from "@assets/mock_data.json";
 
 export const ContentTabContext = createContext<ContentTabContextProps>([
   "latest",
@@ -10,47 +17,72 @@ export const ContentTabContext = createContext<ContentTabContextProps>([
 
 function Content() {
   const [tab, setTab] = useState<ContentTab>("latest");
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<PostProps[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    setPosts(mockData);
-    setIsLoading(false);
-    //   fetch(`https://run.mocky.io/v3/96314262-67b1-455b-a2b2-ef1711d4634c`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setPosts(data);
-    //     setIsLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+    setTimeout(() => {
+      fetch(`https://run.mocky.io/v3/96314262-67b1-455b-a2b2-ef1711d4634c`)
+        .then((response) => response.json())
+        .then((data) => {
+          const latestPosts = [...data].sort(
+            (a, b) =>
+              new Date(b.publicationTime).getTime() -
+              new Date(a.publicationTime).getTime()
+          );
+          setPosts(latestPosts.slice(0, 2));
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }, 1000);
   }, []);
 
   useEffect(() => {
-    if (tab === "latest") setPosts([]);
-    if (tab === "popular") setPosts([]);
+    if (tab === "latest") {
+      const latestPosts = [...mockData].sort(
+        (a, b) =>
+          new Date(b.publicationTime).getTime() -
+          new Date(a.publicationTime).getTime()
+      );
+      setPosts(latestPosts.slice(0, 2));
+    }
+    if (tab === "popular") {
+      const popularPosts = [...mockData]
+        .filter((post) => post.isPopular)
+        .sort(
+          (a, b) =>
+            new Date(b.publicationTime).getTime() -
+            new Date(a.publicationTime).getTime()
+        );
+      setPosts(popularPosts.slice(0, 1));
+    }
   }, [tab]);
 
   return (
-    <section className="content">
-      {isLoading ? (
-        <div>{/* Loader */}</div>
-      ) : (
-        <ContentTabContext.Provider value={[tab, setTab]}>
-          <div>
-            {/* Content Tabs */}
-            {/* Content Filter */}
-          </div>
-          <div>
-            {posts.map((/* post */ _, index) => (
-              <div key={index} /* key={post.id} */> {/* Post */}</div>
-            ))}
-          </div>
-        </ContentTabContext.Provider>
-      )}
-    </section>
+    <ContentTabContext.Provider value={[tab, setTab]}>
+      <section className="content">
+        {isLoading ? (
+          <ContentLoader />
+        ) : (
+          <>
+            <div className="content-top">
+              <ContentTabs />
+              <ContentFilter />
+            </div>
+            <div className="content-posts">
+              {posts.map((post) => (
+                <div key={post.id}>
+                  <Post data={post} />
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </section>
+    </ContentTabContext.Provider>
   );
 }
 

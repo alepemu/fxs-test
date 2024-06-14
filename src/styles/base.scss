@@ -1,12 +1,15 @@
 // Colors
 
 $white: #fff;
+$background: #ececf1;
 
 $dark-grey: #242d38;
 $medium-grey: #8c8d91;
-$light-grey: #ececf1;
+$light-grey: #dddedf;
+$lighter-grey: #f5f5f7;
 
 $dark-blue: #304c70;
+$light-blue: #7598c4;
 
 $orange-primary: #e4871b;
 
@@ -22,6 +25,9 @@ $text-light-blue: #7598c4;
 $layout-breakpoint-medium: 1024px;
 $layout-breakpoint-small: 768px;
 
+$text-size-breakpoint: 970px;
+
 // Grid gap
 
 $grid-gap: 24px;
+$grid-gap-small: 18px;

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-export type Post = {
+export type PostProps = {
   isPopular: boolean;
   id: number;
   author: {

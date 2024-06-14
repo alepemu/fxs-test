@@ -1,0 +1,83 @@
+@import "@/styles/base";
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .content-top {
+    display: flex;
+    justify-content: space-between;
+    color: $text-grey;
+    font-size: 14.6px;
+    font-weight: 700;
+
+    .content-tabs {
+      display: flex;
+      gap: 30px;
+
+      button {
+        background-color: transparent;
+        border: none;
+        color: $text-grey;
+        font-size: 14.6px;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0px;
+
+        &.active {
+          color: $orange-primary;
+        }
+      }
+    }
+  }
+
+  .content-filter {
+    & > :first-child {
+      display: flex;
+      gap: 12px;
+    }
+    & > :last-child {
+      display: none;
+    }
+
+    @media (max-width: $layout-breakpoint-medium) {
+      & > :first-child {
+        display: none;
+      }
+      & > :last-child {
+        display: block;
+      }
+    }
+  }
+
+  .content-posts {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .content-loader {
+    color: $dark-blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    & > :first-child {
+      animation: spin 1s linear infinite;
+    }
+    & > :last-child {
+      color: $medium-grey;
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
