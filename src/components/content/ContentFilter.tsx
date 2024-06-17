@@ -10,15 +10,14 @@ function ContentFilter() {
   });
 
   return (
-    <>
-      <div className="content-filter" onClick={() => setIsOpen(true)}>
-        <div>Show: All ˅</div>
-        <div>
-          <Filter size={16} strokeWidth={2.5} />
-        </div>
-        {isOpen && <VisibilityFilter ref={ref} />}
+    <div className="content-filter">
+      <div>
+        <div>Show:</div>
+        <div onClick={() => setIsOpen(true)}>All ˅</div>
       </div>
-    </>
+      <Filter size={16} strokeWidth={2.5} onClick={() => setIsOpen(true)} />
+      {isOpen && <VisibilityFilter ref={ref} />}
+    </div>
   );
 }
 

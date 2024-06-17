@@ -20,14 +20,29 @@ $text-grey: #49494f;
 $text-light-grey: #a3a3a8;
 $text-light-blue: #7598c4;
 
+// Grid gap
+
+$grid-gap: 24px;
+$grid-gap-small: 18px;
+
+// Text sizes
+
+$text-small: 12.8px;
+$text-medium: 14.7px;
+$text-large: 16px;
+$text-xlarge: 17.6px;
+
+// Font weights
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
+$font-weight-bolder: 700;
+
 // Layout breakpoints
 
 $layout-breakpoint-medium: 1024px;
 $layout-breakpoint-small: 768px;
 
 $text-size-breakpoint: 970px;
-
-// Grid gap
-
-$grid-gap: 24px;
-$grid-gap-small: 18px;

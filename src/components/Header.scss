@@ -3,6 +3,7 @@
 .header {
   display: flex;
   padding: 0 $grid-gap;
+  z-index: 5;
 }
 
 .header-left {

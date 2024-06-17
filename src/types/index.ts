@@ -21,3 +21,8 @@ export type ContentTabContextProps = [
   ContentTab,
   Dispatch<SetStateAction<ContentTab>>
 ];
+
+export type FilterFunction = (
+  posts: PostProps[],
+  quantity: number
+) => PostProps[];

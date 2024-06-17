@@ -1,14 +1,20 @@
 import "@components/content/Content.scss";
 
-import { useEffect, useState, createContext } from "react";
-import { PostProps, ContentTab, ContentTabContextProps } from "@/types";
+import { useEffect, useState, createContext, useCallback } from "react";
+import {
+  PostProps,
+  ContentTab,
+  ContentTabContextProps,
+  FilterFunction,
+} from "@/types";
 
 import ContentTabs from "@components/content/ContentTabs";
 import ContentFilter from "@components/content/ContentFilter";
 import ContentLoader from "@components/content/ContentLoader";
 import Post from "@components/post/Post";
 
-import mockData from "@assets/mock_data.json";
+import { getAPIwithDelay } from "@/services/api";
+import { filterLatest, filterPopular } from "@/services/filter";
 
 export const ContentTabContext = createContext<ContentTabContextProps>([
   "latest",
@@ -20,46 +26,21 @@ function Content() {
   const [posts, setPosts] = useState<PostProps[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      fetch(`https://run.mocky.io/v3/96314262-67b1-455b-a2b2-ef1711d4634c`)
-        .then((response) => response.json())
-        .then((data) => {
-          const latestPosts = [...data].sort(
-            (a, b) =>
-              new Date(b.publicationTime).getTime() -
-              new Date(a.publicationTime).getTime()
-          );
-          setPosts(latestPosts.slice(0, 2));
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    }, 1000);
-  }, []);
+  const fetchPosts = useCallback(
+    async (filter: FilterFunction, quantity: number) => {
+      setIsLoading(true);
+      const postsData = await getAPIwithDelay(500);
+      const filteredPosts = filter(postsData, quantity);
+      setPosts(filteredPosts);
+      setIsLoading(false);
+    },
+    []
+  );
 
   useEffect(() => {
-    if (tab === "latest") {
-      const latestPosts = [...mockData].sort(
-        (a, b) =>
-          new Date(b.publicationTime).getTime() -
-          new Date(a.publicationTime).getTime()
-      );
-      setPosts(latestPosts.slice(0, 2));
-    }
-    if (tab === "popular") {
-      const popularPosts = [...mockData]
-        .filter((post) => post.isPopular)
-        .sort(
-          (a, b) =>
-            new Date(b.publicationTime).getTime() -
-            new Date(a.publicationTime).getTime()
-        );
-      setPosts(popularPosts.slice(0, 1));
-    }
-  }, [tab]);
+    if (tab === "latest") fetchPosts(filterLatest, 2);
+    if (tab === "popular") fetchPosts(filterPopular, 1);
+  }, [tab, fetchPosts]);
 
   return (
     <ContentTabContext.Provider value={[tab, setTab]}>
