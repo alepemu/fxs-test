@@ -1,5 +1,7 @@
 import { Heart, Bookmark, Ellipsis } from "lucide-react";
 import { useState } from "react";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
+import MoreOptions from "./options/MoreOptions";
 
 const LikePost = () => {
   const [liked, setLiked] = useState(false);
@@ -28,11 +30,21 @@ const BookmarkPost = () => {
   );
 };
 
-const OptionsPost = () => {
+const MorePost = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref1 = useOutsideClick(() => {
+    setIsOpen(false);
+  });
+
   return (
-    <button>
-      <Ellipsis size={16} strokeWidth={2.5} />
-    </button>
+    <>
+      <button onClick={() => setIsOpen(true)}>
+        <Ellipsis size={16} strokeWidth={2.5} />
+      </button>
+      <div className="more-options-pre">
+        {isOpen && <MoreOptions ref={ref1} />}
+      </div>
+    </>
   );
 };
 
@@ -41,7 +53,7 @@ function PostOptions() {
     <section className="post-options">
       <LikePost />
       <BookmarkPost />
-      <OptionsPost />
+      <MorePost />
     </section>
   );
 }
