@@ -8,7 +8,6 @@
   right: -100px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   @media (max-width: $layout-breakpoint-small) {
-    // right: -20px;
     position: fixed;
     bottom: 0px;
     left: 0px;
@@ -33,7 +32,7 @@
 
 // Hide options CONTAINER
 
-.hide-options-pre {
+.hide-options-container {
   position: absolute;
   @media (max-width: $layout-breakpoint-small) {
     width: 100%;
@@ -107,6 +106,7 @@
       label {
         font-size: 14.7px;
         text-align: left;
+        font-weight: $font-weight-normal;
       }
       button {
         color: $text-light-grey;

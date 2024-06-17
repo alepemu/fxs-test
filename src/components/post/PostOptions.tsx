@@ -41,7 +41,7 @@ const MorePost = () => {
       <button onClick={() => setIsOpen(true)}>
         <Ellipsis size={16} strokeWidth={2.5} />
       </button>
-      <div className="more-options-pre">
+      <div className="more-options-container">
         {isOpen && <MoreOptions ref={ref1} />}
       </div>
     </>

@@ -9,14 +9,15 @@
 
   .post-details {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 8px;
     height: 44px;
     background-color: $lighter-grey;
     border-radius: 8px 8px 0px 0px;
-    color: $dark-grey;
     padding: 0px 30px;
+    color: $dark-grey;
+    font-size: $text-xlarge;
+    font-weight: $font-weight-bolder;
 
     @media (max-width: $layout-breakpoint-medium) {
       height: 54px;
@@ -30,9 +31,6 @@
       align-items: center;
       gap: 8px;
       color: $dark-blue;
-      font-size: $text-xlarge;
-      font-weight: $font-weight-bolder;
-      line-height: 20.8px;
       overflow: hidden;
 
       .feed {
@@ -79,7 +77,6 @@
       color: $text-grey;
       font-size: $text-small;
       font-weight: $font-weight-normal;
-      line-height: 15px;
     }
   }
 
@@ -198,7 +195,7 @@
 
     // More options CONTAINER
 
-    .more-options-pre {
+    .more-options-container {
       position: relative;
       @media (max-width: $layout-breakpoint-small) {
         position: fixed;

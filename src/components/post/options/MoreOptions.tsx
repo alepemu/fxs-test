@@ -21,7 +21,7 @@ const MoreOptions = forwardRef<HTMLDivElement>((_, ref) => {
           <SlidersHorizontal size={14} strokeWidth={2.5} />
           <p>Improve my feed</p>
         </button>
-        <div className="hide-options-pre">
+        <div className="hide-options-container">
           {isOpen && <HideOptions ref={ref2} setIsOpen={setIsOpen} />}
         </div>
       </div>

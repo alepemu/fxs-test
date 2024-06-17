@@ -1,6 +1,6 @@
 # FXStreet (test)
 
-This repository contains
+This repository contains a techincal exercise for FXStreet
 
 ## Installation
 
